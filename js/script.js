@@ -47,8 +47,8 @@ $(document).ready(function(){
 	var selectedTransport, error, people;
 	var firstLoad = true;
 
-	// Calling Tooltips across the entire document
-	$(document).tooltip();
+	// Playing the video once things are fully loaded
+	vid.play();
 
 	// Fade out the Tutorial Swiper once clicked
 	$("#fade-intro").click(function(){
