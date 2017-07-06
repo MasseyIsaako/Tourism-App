@@ -13,7 +13,7 @@ var calories = 32.5;
 // Setting all global variables up here
 var map, userMarker, directionsDisplay, distanceFromOrigin, recommendedTransport, travelCost, dailyCost, days, litrePerHundred;
 
-
+var allMarkers = [];
 // List containing the information about vehicles and cost. That way, future developer can
 // change the existing costs here because fuel cost fluctuates a lot.
 var drivingOptions = [
@@ -124,7 +124,7 @@ $(document).ready(function(){
 	});
 
 	// Form Validation
-	$("#submit").click(function(){
+	$("#submit").click(function(event){
 		people = $("#people").val();
 		days = $("#days").val();
 		selectedTransport = $("#transport").val();
@@ -186,40 +186,6 @@ function initialiseIntro(){
 	})
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Initialising the Google Map
 function initialiseMap(){
 	// Setting the position of the map as well as the default interactivity
@@ -244,6 +210,7 @@ function initialiseMap(){
 	map = new google.maps.Map(document.getElementById("map"), defaultOptions);
 	findMe();
 	runMap();
+	injectAttractions();
 
 	// This event listener calls addMarker() when the map is clicked.
     google.maps.event.addListener(map, 'click', function(event) {
@@ -254,6 +221,55 @@ function initialiseMap(){
 // Line to load all the information written in the init function.
 function runMap(){
 	google.maps.event.addDomListener(window, "load", initialiseMap);
+};
+
+// Showing all markers using ajax and external json files
+function injectAttractions(){
+	$.ajax({
+		url: "js/attractions.json",
+		dataType: 'json',
+		success: function(DataFromJSON){
+			console.log(DataFromJSON);
+			for (var i = 0; i < DataFromJSON.length; i++) {
+				console.log(DataFromJSON[i]);
+				var marker = new google.maps.Marker({
+					position: {
+						lat: DataFromJSON[i].lat,
+						lng: DataFromJSON[i].lng
+					},
+					map: map,
+					animation:google.maps.Animation.DROP,
+					title:DataFromJSON[i].title,
+					description:DataFromJSON[i].description,
+					icon: "images/binoculars-icon.png"
+				})
+
+				// Adding event listener to function
+				popup(marker);
+				allMarkers.push(marker);
+			};
+		},	
+		error: function(){
+			console.log("Something went wrong!");
+		}
+	})
+};
+
+var popupBox;
+
+// Information is being displayed using this function about each marker.
+function popup(marker){
+	if(popupBox){
+		popupBox.close();
+	}
+
+	popupBox = new google.maps.InfoWindow();
+	google.maps.event.addListener(marker, "click", function(){
+		popupBox.setContent("<div id='title'><p><strong>"+marker.title+"</strong></p></div><hr>"+
+							"<div id='description'><i>"+marker.description+"</i></div>");
+		popupBox.open(map,marker);
+	})
+	return;
 };
 
 // Locate the user
