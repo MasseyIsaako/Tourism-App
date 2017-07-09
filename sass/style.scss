@@ -462,3 +462,8 @@ video{
 		}
 	}
 }
+
+#title, #description{
+	float:none !important;
+	width:$full;
+}

@@ -11,7 +11,7 @@ var fuelCost = 1.859;
 var calories = 32.5;
 
 // Setting all global variables up here
-var map, userMarker, directionsDisplay, distanceFromOrigin, recommendedTransport, travelCost, dailyCost, days, litrePerHundred, popup;
+var map, userMarker, directionsDisplay, distanceFromOrigin, recommendedTransport, travelCost, dailyCost, days, litrePerHundred, popupBox;
 
 var allMarkers = [];
 // List containing the information about vehicles and cost. That way, future developer can
@@ -263,7 +263,7 @@ function popup(marker){
 
 	popupBox = new google.maps.InfoWindow();
 	google.maps.event.addListener(marker, "click", function(){
-		popupBox.setContent("<div id='title'><p><strong>"+marker.title+"</strong></p></div><hr>"+
+		popupBox.setContent("<div id='title'><p><strong>"+marker.title+"</strong></p></div>"+
 							"<div id='description'><i>"+marker.description+"</i></div>");
 		popupBox.open(map,marker);
 	})

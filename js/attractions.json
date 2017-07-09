@@ -27,13 +27,13 @@
 		"lat":-40.3579837,
 		"lng":175.6076745,
 		"title": "Palmerston North",
-		"description": "New Zealand Rugby Museum"
+		"description": "NZ Rugby Museum"
 	},
 	{
 		"lat":-41.2904189,
 		"lng":174.7820227,
 		"title": "Wellington",
-		"description": "Te Papa Tongarewa Museum"
+		"description": "Te Papa Museum"
 	},
 	{
 		"lat":-40.9338908,
@@ -63,6 +63,6 @@
 		"lat":-46.4081018,
 		"lng":168.3465996,
 		"title": "Invercargill",
-		"description": "E Hayes and Sons - The World's Fastest Indian"
+		"description": "E Hayes and Sons Museum"
 	}
 ]
