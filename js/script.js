@@ -11,7 +11,7 @@ var fuelCost = 1.859;
 var calories = 32.5;
 
 // Setting all global variables up here
-var map, userMarker, directionsDisplay, distanceFromOrigin, recommendedTransport, travelCost, dailyCost, days, litrePerHundred;
+var map, userMarker, directionsDisplay, distanceFromOrigin, recommendedTransport, travelCost, dailyCost, days, litrePerHundred, popup;
 
 var allMarkers = [];
 // List containing the information about vehicles and cost. That way, future developer can
@@ -254,8 +254,6 @@ function injectAttractions(){
 		}
 	})
 };
-
-var popupBox;
 
 // Information is being displayed using this function about each marker.
 function popup(marker){

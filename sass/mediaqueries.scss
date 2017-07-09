@@ -2,16 +2,11 @@
 @import "var_mix.scss";
 
 // Tablet Sizing
-@media only screen and (min-width:768px) and (max-width:1024px){
+@media only screen and (min-width:768px){
 	#fullscreen{
 		@include fullscreen;
 		background-color:black;
 		position:fixed;
 		z-index:100;
 	}
-}
-
-// Mobile Sizing
-@media only screen and (max-width:767px){
-	
 }
