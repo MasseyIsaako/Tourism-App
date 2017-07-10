@@ -325,6 +325,12 @@ video{
 // That div is where all the information is located regarding
 // calories burnt, fuel cost, distance to travel and recommended
 // transport mode based on the users input.
+@keyframes jump{
+	0%{margin-bottom:$null;}
+	50%{margin-bottom:10px;}
+	100%{margin-bottom:$null;}
+}
+
 #map-stage{
 	display:none;
 
@@ -350,6 +356,7 @@ video{
 			padding-bottom:50px;
 			z-index:2;
 			bottom:$null;
+			animation:jump 2s infinite;
 
 			i{
 				@include centerObject;
