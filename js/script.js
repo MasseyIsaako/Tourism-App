@@ -50,6 +50,11 @@ $(document).ready(function(){
 	// Playing the video once things are fully loaded
 	vid.play();
 
+	// Setting Reload for TNZ Logo
+	$("#home-reload").click(function(){
+		location.reload();
+	});
+
 	// Fade out the Tutorial Swiper once clicked
 	$("#fade-intro").click(function(){
 		$("#intro-container").fadeOut(300);
@@ -74,11 +79,11 @@ $(document).ready(function(){
 
 		 if(openCloseIcon === "fa-th-list"){
 		 	icon.removeClass("fa-th-list");
-		 	icon.addClass("fa-times");
+		 	icon.addClass("fa-map-signs");
 		 	mapStageContainer.fadeOut(300);
-		 } else if (openCloseIcon === "fa-times"){
+		 } else if (openCloseIcon === "fa-map-signs"){
 		 	icon.addClass("fa-th-list");
-		 	icon.removeClass("fa-times");
+		 	icon.removeClass("fa-map-signs");
 		 	mapStageContainer.fadeIn(300);
 		 }
 
@@ -100,7 +105,6 @@ $(document).ready(function(){
 		integerValue = Number(integerValue.value);
 
 		if(integerValue === maxValue){
-			console.log("Match");
 			return;
 		} else if(integerValue < maxValue){
 			inputField.childNodes[12].value = integerValue + 1;
@@ -116,7 +120,6 @@ $(document).ready(function(){
 		integerValue = Number(integerValue.value);
 		
 		if(integerValue === minValue){
-			console.log("Match");
 			return;
 		} else if(integerValue > minValue){
 			inputField.childNodes[12].value = integerValue - 1;
@@ -161,16 +164,13 @@ $(document).ready(function(){
 		var icon = $("#chevron-toggle")[0].classList[1];
 		var openCloseIcon = $("#chevron-toggle");
 		
-		if(icon === "fa-chevron-up"){
-			openCloseIcon.removeClass("fa-chevron-up");
-			openCloseIcon.addClass("fa-chevron-down");
-			openCloseIcon.css("background-color", "#76B2B7");
-			openCloseIcon.css("color", "#FFF");
-		} else if(icon === "fa-chevron-down"){
+		if(icon === "fa-times"){
+			openCloseIcon.removeClass("fa-times");
 			openCloseIcon.addClass("fa-chevron-up");
-			openCloseIcon.removeClass("fa-chevron-down");
-			openCloseIcon.css("background-color", "#FFF");
-			openCloseIcon.css("color", "#76B2B7");
+			openCloseIcon.css("color", "#FFF");
+		} else if(icon === "fa-chevron-up"){
+			openCloseIcon.addClass("fa-times");
+			openCloseIcon.removeClass("fa-chevron-up");
 		}
 
 		$("#slider-info").slideToggle(300);
@@ -229,9 +229,7 @@ function injectAttractions(){
 		url: "js/attractions.json",
 		dataType: 'json',
 		success: function(DataFromJSON){
-			console.log(DataFromJSON);
 			for (var i = 0; i < DataFromJSON.length; i++) {
-				console.log(DataFromJSON[i]);
 				var marker = new google.maps.Marker({
 					position: {
 						lat: DataFromJSON[i].lat,
@@ -393,9 +391,6 @@ function calculateFuelCost(){
 
 function calculateCalories(selectedTransport){
 	var travelDistance = distanceFromOrigin / 1000;
-	console.log("Distance: " + travelDistance);
-	console.log("selectedMode: " + selectedTransport);
-	console.log("Calories Burned");
 	caloriesOutput.innerText = "";
 	costOutput.innerText = " NA ";
 	caloriesOutput.innerText = (calories * travelDistance).toFixed(0);

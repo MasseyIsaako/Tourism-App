@@ -1,5 +1,5 @@
 // Importing variables/mixins and media queries
-@import "var_mix.scss", "mediaqueries.scss";
+@import "var_mix.scss";
 
 // Importing Google Fonts
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Raleway');
@@ -19,11 +19,11 @@ body, html{
 // Full containment div for app
 #wrapper{
 	@include fullscreen;
-	background-image:url("../images/beach.jpg");
+	background-image:url("../images/holgi_lighthouse.jpg");
 	background-attachment:fixed;
 	background-repeat:no-repeat;
 	background-size:cover;
-	background-position:center right;
+	background-position:center;
 	position:absolute;
 }
 
@@ -229,7 +229,7 @@ video{
 // in order for the map to work.
 #input-form{
 	display:none;
-	background-color:rgba(20, 44, 81, 0.5);
+	background-color:rgba(118, 178, 183, 0.1);
 }
 
 
@@ -325,12 +325,6 @@ video{
 // That div is where all the information is located regarding
 // calories burnt, fuel cost, distance to travel and recommended
 // transport mode based on the users input.
-@keyframes jump{
-	0%{margin-bottom:$null;}
-	50%{margin-bottom:10px;}
-	100%{margin-bottom:$null;}
-}
-
 #map-stage{
 	display:none;
 
@@ -348,6 +342,15 @@ video{
 		bottom:$null;
 		height:auto;
 
+		#drag-message{
+			@include centerText;
+			@include josefin;
+			height:auto;
+			position:absolute;
+			top:-60px;
+			z-index:50;
+		}
+
 		#toggle-info-slider{
 			position:absolute;
 			height:auto;
@@ -356,7 +359,6 @@ video{
 			padding-bottom:50px;
 			z-index:2;
 			bottom:$null;
-			animation:jump 2s infinite;
 
 			i{
 				@include centerObject;
@@ -366,20 +368,22 @@ video{
 				position:absolute;
 				padding:10px;
 				border-radius:20px;
-				background-color:$accent;
+				background-color:$primary;
 				color:$secondary;
 			}
 		}
 
 		#slider-info{
 			@include raleway;
+			border-top:1px solid $secondary;
 			display:none;
-			position:absolute;
+			position:relative;
 			width:$full;
 			height:auto;
 			background-color:$accent;
 			font-weight:300;
 			font-size:14px;
+			margin-top:15px;
 
 			.info-group{
 				@include centerText;
@@ -391,10 +395,11 @@ video{
 				margin-bottom:20px;
 
 				.tooltip{
-					background-color:$primary;
 					padding:10px $null;
 					width:80%;
 					margin-left:10%;
+					font-weight:400;
+					color:$primary;
 				}
 
 				i{
@@ -432,6 +437,7 @@ video{
 			width:70%;
 			margin:15px 15%;
 			text-align:center;
+			font-size:18px;
 		}
 
 		ul{
@@ -473,4 +479,14 @@ video{
 #title, #description{
 	float:none !important;
 	width:$full;
+}
+
+// Tablet Sizing
+@media only screen and (min-width:768px){
+	#fullscreen{
+		@include fullscreen;
+		background-color:black;
+		position:fixed;
+		z-index:100;
+	}
 }
