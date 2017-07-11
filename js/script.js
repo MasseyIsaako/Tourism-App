@@ -312,7 +312,7 @@ function showDirection(location){
 	directionsDisplay.setMap(map);
 	directionsService.route({
 		origin: locateOrigin.position,
-		destination: {location},
+		destination: location,
 		travelMode: google.maps.TravelMode[selectedMode]
 	}, function(response, status){
 		if(status === "OK"){
