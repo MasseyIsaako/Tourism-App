@@ -16,6 +16,25 @@ body, html{
 	float:left;
 }
 
+// Bouncing the little arrow at the bottom
+@keyframes bounce{
+	0% {top:25px;}
+	5% {top:10px;}
+	10% {top:25px;}
+	15% {top:10px;}
+	20% {top:25px;}
+	100% {top:25px;}
+	// 20% {top:25px;}
+	// 30% {top:10px;}
+	// 40% {top:25px;}
+	// 50% {top:25px;}
+	// 60% {top:25px;}
+	// 70% {top:25px;}
+	// 80% {top:25px;}
+	// 90% {top:25px;}
+	// 100% {top:25px;}
+}
+
 // Full containment div for app
 #wrapper{
 	@include fullscreen;
@@ -342,15 +361,6 @@ video{
 		bottom:$null;
 		height:auto;
 
-		#drag-message{
-			@include centerText;
-			@include josefin;
-			height:auto;
-			position:absolute;
-			top:-60px;
-			z-index:50;
-		}
-
 		#toggle-info-slider{
 			position:absolute;
 			height:auto;
@@ -362,9 +372,11 @@ video{
 
 			i{
 				@include centerObject;
+
 			}
 
 			.fa{
+				animation:bounce 20s infinite;
 				position:absolute;
 				padding:10px;
 				border-radius:20px;
