@@ -160,8 +160,9 @@ video{
     }
 
 	.swiper-container{
-		width:100vw;
-		height:100vh;
+		@include fullscreen;
+		// width:100vw;
+		// height:100vh;
 		position:absolute;
 		background-color:$secondary;
 	}
