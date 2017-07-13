@@ -13,7 +13,7 @@ var calories = 32.5;
 // Setting all global variables up here
 var map, userMarker, directionsDisplay, distanceFromOrigin, recommendedTransport, travelCost, dailyCost, days, litrePerHundred, popupBox, locateOrigin;
 
-// Object containing the information about vehicles and cost. That way, future developer can
+// Object containing information about vehicles and cost. This will help future developers
 // update the existing costs.
 var drivingOptions = [
 	{
@@ -45,7 +45,6 @@ $(document).ready(function(){
 	var increase = $(".up");
 	var decrease = $(".down");
 	var selectedTransport, error, people;
-	var firstLoad = true;
 
 	// Playing the video once things are fully loaded
 	vid.play();
@@ -71,12 +70,13 @@ $(document).ready(function(){
 		initialiseIntro();
 	});
 
-	// Show Form Function
+	// Toggle the form
 	function toggleForm(delayMe){
 		var icon = $("#menu-link");
 		var mapStageContainer = $("#map-stage");
 		var openCloseIcon = $("#menu-link")[0].classList[1];
 
+		// This switches the font awesome icons according to the toggle function and what class is present
 		 if(openCloseIcon === "fa-th-list"){
 		 	icon.removeClass("fa-th-list");
 		 	icon.addClass("fa-map-signs");
@@ -87,6 +87,7 @@ $(document).ready(function(){
 		 	mapStageContainer.fadeIn(300);
 		 }
 
+		 // Toggling the form visibility
 		inputContainer.delay(delayMe).fadeToggle(300);
 	}
 
@@ -97,6 +98,7 @@ $(document).ready(function(){
 
 	// Plus and Minus button function
 	increase.click(function(){
+		// These are variables that identify the input field and the max value of the input field
 		var integerValue = this.parentNode;
 		var inputField = this.parentNode;
 		var maxValue = Number(integerValue.childNodes[12].max);
@@ -104,6 +106,7 @@ $(document).ready(function(){
 		integerValue = integerValue.childNodes[12];
 		integerValue = Number(integerValue.value);
 
+		// If the current input field value is === the maximum set in the HTML than return, else add 1.
 		if(integerValue === maxValue){
 			return;
 		} else if(integerValue < maxValue){
@@ -112,6 +115,7 @@ $(document).ready(function(){
 	});
 
 	decrease.click(function(){
+		// These are variables that identify the input field and the max value of the input field
 		var integerValue = this.parentNode;
 		var inputField = this.parentNode;
 		var minValue = Number(integerValue.childNodes[12].min);
@@ -119,6 +123,7 @@ $(document).ready(function(){
 		integerValue = integerValue.childNodes[12];
 		integerValue = Number(integerValue.value);
 		
+		// If the current input field value is === the minimum set in the HTML than return, else minus 1.
 		if(integerValue === minValue){
 			return;
 		} else if(integerValue > minValue){
@@ -132,7 +137,10 @@ $(document).ready(function(){
 		days = $("#days").val();
 		selectedTransport = $("#transport").val();
 
+		// Stop the form from submitting
 		event.preventDefault();
+
+		// Sending information from the input fields through to validation. 
 		var peopleInfo = validateInput(people, error, 1, 6);
 		var daysInfo = validateInput(days, error, 1, 15);
 
@@ -145,17 +153,15 @@ $(document).ready(function(){
 				calculateCalories(selectedTransport);
 			}
 
+			// FadeIn the map and toggle the input form
 			$("#map").fadeIn(300);
 			toggleForm();
 		}
 	});
 
-	// Close Route Prompter
+	// Close prompt and then initialise the Google Map
 	$("#close-prompt").click(function(){
-		// if(firstLoad === true){
-		firstLoad = false;
 		initialiseMap();
-			// }
 		$("#prompt-route").fadeOut(300);
 	});
 
@@ -164,6 +170,7 @@ $(document).ready(function(){
 		var icon = $("#chevron-toggle")[0].classList[1];
 		var openCloseIcon = $("#chevron-toggle");
 		
+		// Switch the icon everytime it is clicked.
 		if(icon === "fa-times"){
 			openCloseIcon.removeClass("fa-times");
 			openCloseIcon.addClass("fa-chevron-up");
@@ -173,11 +180,13 @@ $(document).ready(function(){
 			openCloseIcon.removeClass("fa-chevron-up");
 		}
 
+		// Toggle slide the slider information
 		$("#slider-info").slideToggle(300);
 	});
 });
 
 // Running the needed swiper variable with parameters in order for the intro to work
+// This is specified for a vertical slide and a vertical pagination.
 function initialiseIntro(){
 	var swiper = new Swiper('.swiper-container', {
 	    pagination: '.swiper-pagination',
@@ -190,12 +199,11 @@ function initialiseIntro(){
 function initialiseMap(){
 	// Setting the position of the map as well as the default interactivity
 	var defaultOptions = {
-		// Map center position is the a view of New Zealand
+		// Map center position is a view of New Zealand
 		center: {
 			lat:-41.2165668,
 			lng:172.6385759
 		},
-		// Zoom should be 10
 		zoom:5,
 		disableDefaultUI:true,
 		scrollwheel:true,
@@ -207,18 +215,19 @@ function initialiseMap(){
 		}
 	};
 
+	// Creating a new instance of map, locating the users position, run the map anf then show all the attractions.
 	map = new google.maps.Map(document.getElementById("map"), defaultOptions);
 	findMe();
 	runMap();
 	injectAttractions();
 
-	// This event listener calls addMarker() when the map is clicked.
+	// This event listener calls addMarker() once the map is clicked.
     google.maps.event.addListener(map, 'click', function(event) {
       addMarker(event.latLng, map);
     });
 }
 
-// Line to load all the information written in the init function.
+// Line to load all the information written in the initialiseMap() function.
 function runMap(){
 	google.maps.event.addDomListener(window, "load", initialiseMap);
 }
@@ -226,7 +235,7 @@ function runMap(){
 // Showing all markers using ajax and external json files
 function injectAttractions(){
 	$.ajax({
-		url: "js/attractions.json",
+		url: "js/attractions.min.json",
 		dataType: 'json',
 		success: function(DataFromJSON){
 			for (var i = 0; i < DataFromJSON.length; i++) {
@@ -242,7 +251,7 @@ function injectAttractions(){
 					icon: "images/binoculars-icon.png"
 				});
 
-				// Adding event listener to function
+				// Adding event listener to function, allowing the user to toggle the infobox in the Google Map
 				popup(marker);
 			}
 		},	
@@ -267,7 +276,8 @@ function popup(marker){
 	return;
 }
 
-// Locate the user
+// Locate the users geolocation using their GPS locationthrough Google Maps API, 
+// once they are found, then pan to users position
 function findMe(){
 	if(navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(function(position){
@@ -283,7 +293,7 @@ function findMe(){
 	}
 }
 
-// Adds a marker to the map.
+// Adds a marker to the map for the program to find a route towards.
 function addMarker(location, map) {
 	if (userMarker){
 		userMarker.setMap(null);
@@ -297,6 +307,7 @@ function addMarker(location, map) {
 	showDirection(userMarker.position);
 }
 
+// Find out a route from geolocation to selected destination of the user
 function showDirection(location){
 	if(directionsDisplay){
 		directionsDisplay.setMap(null);
@@ -305,6 +316,7 @@ function showDirection(location){
 	var directionsService = new google.maps.DirectionsService();
 	directionsDisplay = new google.maps.DirectionsRenderer();
 
+	// Pull value from the transport mode section 
 	var selectedMode = selectTravelMode();
 
 	directionsDisplay.setMap(map);
@@ -317,14 +329,17 @@ function showDirection(location){
 			directionsDisplay.setDirections(response);
 			distanceFromOrigin = response.routes[0].legs[0].distance.value;
 
-			// This will convert the string to first letter capitalised
 			if (selectedMode !== "DRIVING" && selectedMode !== "TRANSIT"){
 				calculateCalories(selectedMode);
+
+				// This will convert the string to first letter capitalised
 				selectedMode = selectedMode[0].toUpperCase() + selectedMode.slice(1).toLowerCase();
 				transportOutput.innerText = selectedMode;
 			} else if(selectedMode === "DRIVING"){
 				calculateFuelCost();
 			} else if(selectedMode === "TRANSIT"){
+
+				// This will convert the string to first letter capitalised
 				selectedMode = selectedMode[0].toUpperCase() + selectedMode.slice(1).toLowerCase();
 				costOutput.innerText = " NA ";
 				caloriesOutput.innerText = " NA ";
@@ -376,6 +391,7 @@ function calculateFuelCost(){
 		}
 	}
 
+	// Running cost calculations
 	daysCost = dailyCost * days;
 	travelDistance = distanceFromOrigin / 1000;
 	travelCost = fuelCost * litrePerHundred * (travelDistance/10);
@@ -387,6 +403,7 @@ function calculateFuelCost(){
 	costOutput.innerText = "$" + travelCost.toFixed(2);
 }
 
+// Calculate user calpories
 function calculateCalories(selectedTransport){
 	var travelDistance = distanceFromOrigin / 1000;
 	caloriesOutput.innerText = "";

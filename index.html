@@ -20,7 +20,7 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 		<!-- Swiper CSS -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
 
 		<!-- Connecting to TNZ CSS Stylesheet -->
 		<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -44,16 +44,19 @@
 				<!-- Navigation -->
 				<div id="nav-container">
 					<div id="home-reload"><img src="images/logo.png" alt="This is the Tourism New Zealand Logo."></div>
+					<!-- This is the icon used to toggle the map/inputform -->
 					<i id="menu-link" class="fa fa-th-list" aria-hidden="true"></i>
 				</div>
 
 				<!-- Splash/Landing stage -->
 				<div id="splash" class="stage-container">
+					<!-- TNZ Logo -->
 					<img src="images/logo.png" alt="This is the Tourism New Zealand Logo.">
+					<!-- Start button to fade in the Swiper plugin -->
 					<button id="start" class="standard-button">GET STARTED!</button>
 				</div>
 
-				<!-- Slider main container -->
+				<!-- Swiper Container -->
 				<div id="intro-container" class="stage-container">
 					<div id="top-left" class="img-container"></div>
 					<div id="bottom-right" class="img-container"><p>Swipe Up</p></div>
@@ -74,7 +77,7 @@
 								</button>
 							</div>
 						</div>
-						<!-- Add Pagination -->
+						<!-- This vertical white pagination is on the left side of the app -->
         				<div class="swiper-pagination"></div>
 					</div>
 				</div>
@@ -82,6 +85,7 @@
 				<!-- Input Form Stage -->
 				<div id="input-form" class="stage-container">
 
+					<!-- Setting up the input form -->
 					<form autocomplete="on" action="index.html" method="POST" enctype="multipart/form-data" id="user-input-form">
 
 					<!-- Number of People Visiting -->
@@ -90,11 +94,14 @@
 							<label for="people">
 								Number of People
 							</label><br>
+							<!-- Input validation span -->
 							<span id="people-errors"></span>
 
-							<!-- Increase and decrease values -->
+							<!-- Increase -->
 							<div class="change-value down"><i class="fa fa-minus-square" aria-hidden="true"></i></div>
+								<!-- Input field -->
 								<input type="number" name="people" id="people" value="1" min="1" max="6">
+							<!-- Decrease -->
 							<div class="change-value up"><i class="fa fa-plus-square" aria-hidden="true"></i></div>
 						</div>
 
@@ -104,11 +111,14 @@
 							<label for="days">
 								Days in New Zealand
 							</label><br>
+							<!-- Input validation span -->
 							<span id="days-errors"></span>
 
-							<!-- Increase and decrease values -->
+							<!-- Increase -->
 							<div class="change-value down"><i class="fa fa-minus-square" aria-hidden="true"></i></div>
+								<!-- Input field -->
 								<input type="number" name="days" id="days" value="3" min="1" max="15">
+							<!-- Decrease -->
 							<div class="change-value up"><i class="fa fa-plus-square" aria-hidden="true"></i></div>
 						</div>
 
@@ -127,6 +137,7 @@
 							</select>
 						</div>
 
+						<!-- Submit button -->
 						<input class="standard-button" type="submit" name="submit" value="FIND ROUTE" id="submit">
 
 					</form>
@@ -137,7 +148,6 @@
 				<div id="map-stage" class="stage-container">
 				<!-- This is the map container itself, used by the Google Maps API to embed itself -->
 					<div id="map"></div>
-
 					<!-- Container for the slider at the bottom of the screen -->
 					<div id="slider-container">
 						<!-- This is the container for the arrow to toggle the slider -->
@@ -169,10 +179,12 @@
 							</div>
 						</div>
 					</div>
+
+					<!-- This is the fullscreen overlay that appears for the users benefit -->
 					<div id="prompt-route">
-						<h3>Please read!</h3>
+						<h3>IMPORTANT</h3>
 						<hr>
-						<p>Enable your device location for this app to work.</p>
+						<p>Enable your device location before continuing.</p>
 						<p>Tap the map to add your destination.</p>
 						<p>Tap the arrow to see:</p>
 						<ul>
@@ -181,7 +193,9 @@
 							<li>Cost of Travel</li>
 							<li>Calories Burned</li>
 						</ul>
+						<!-- Following copyright law, attribution to intellectual property -->
 						<p class="koru-attribution">Koru - Andrew Fyfe</p>
+						<!-- This buttons closes the prompt as well as intialises the Google Map -->
 						<button id="close-prompt" class="standard-button">Okay</button>
 
 						<div id="footer">
@@ -201,10 +215,10 @@
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCArtnqlCNjpV-XZSdkZ1he2Z5jUXTkUN8&libraries=geometry"></script>
 
 		<!-- Swiper jQuery -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.jquery.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
 
 		<!-- My Javascript File -->
-		<script type="text/javascript" src="js/script.js"></script>
+		<script type="text/javascript" src="js/script.min.js"></script>
 
 	</body>
 </html>

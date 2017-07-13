@@ -13,7 +13,7 @@ $accent:#76B2B7;
 @mixin josefin{font-family: 'Josefin Sans', sans-serif;}
 @mixin raleway{font-family: 'Raleway', sans-serif;}
 
-// Perfect Centering Mixins
+// Perfect centering for divs
 @mixin centerObject{
 	position:absolute;
 	top:50%;
@@ -21,13 +21,14 @@ $accent:#76B2B7;
 	transform:translate(-50%,-50%);
 }
 
+// Perfect centering for text
 @mixin centerText{
 	width:$full;
 	height:auto;
 	text-align:center;
 }
 
-// Fullscreen Mixins
+// Fullscreen mixin
 @mixin fullscreen{
 	min-width:$full;
 	min-height:$full;
