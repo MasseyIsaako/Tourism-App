@@ -11,11 +11,10 @@ var fuelCost = 1.859;
 var calories = 32.5;
 
 // Setting all global variables up here
-var map, userMarker, directionsDisplay, distanceFromOrigin, recommendedTransport, travelCost, dailyCost, days, litrePerHundred, popupBox;
+var map, userMarker, directionsDisplay, distanceFromOrigin, recommendedTransport, travelCost, dailyCost, days, litrePerHundred, popupBox, locateOrigin;
 
-var allMarkers = [];
-// List containing the information about vehicles and cost. That way, future developer can
-// change the existing costs here because fuel cost fluctuates a lot.
+// Object containing the information about vehicles and cost. That way, future developer can
+// update the existing costs.
 var drivingOptions = [
 	{
 		vehicle: "Motorbike",
@@ -37,8 +36,9 @@ var drivingOptions = [
 		costPerDay: 129,
 		litrePerHundredKm: 17
 	}
-]
+];
 
+ // All the scripts are loaded once the whole document is ready.
 $(document).ready(function(){
 	// jQuery Variables
 	var inputContainer = $("#input-form");
@@ -50,7 +50,7 @@ $(document).ready(function(){
 	// Playing the video once things are fully loaded
 	vid.play();
 
-	// Setting Reload for TNZ Logo
+	// Setting page reload for TNZ Logo on click
 	$("#home-reload").click(function(){
 		location.reload();
 	});
@@ -183,8 +183,8 @@ function initialiseIntro(){
 	    pagination: '.swiper-pagination',
 	    paginationType: 'progress',
 		direction: 'vertical'
-	})
-};
+	});
+}
 
 // Initialising the Google Map
 function initialiseMap(){
@@ -205,7 +205,7 @@ function initialiseMap(){
 		mapTypeControlOptions: {
 			position:google.maps.ControlPosition.TOP_CENTER
 		}
-	}
+	};
 
 	map = new google.maps.Map(document.getElementById("map"), defaultOptions);
 	findMe();
@@ -216,12 +216,12 @@ function initialiseMap(){
     google.maps.event.addListener(map, 'click', function(event) {
       addMarker(event.latLng, map);
     });
-};
+}
 
 // Line to load all the information written in the init function.
 function runMap(){
 	google.maps.event.addDomListener(window, "load", initialiseMap);
-};
+}
 
 // Showing all markers using ajax and external json files
 function injectAttractions(){
@@ -240,18 +240,17 @@ function injectAttractions(){
 					title:DataFromJSON[i].title,
 					description:DataFromJSON[i].description,
 					icon: "images/binoculars-icon.png"
-				})
+				});
 
 				// Adding event listener to function
 				popup(marker);
-				allMarkers.push(marker);
-			};
+			}
 		},	
 		error: function(){
 			console.log("Something went wrong!");
 		}
-	})
-};
+	});
+}
 
 // Information is being displayed using this function about each marker.
 function popup(marker){
@@ -264,9 +263,9 @@ function popup(marker){
 		popupBox.setContent("<div id='title'><p><strong>"+marker.title+"</strong></p></div>"+
 							"<div id='description'><i>"+marker.description+"</i></div>");
 		popupBox.open(map,marker);
-	})
+	});
 	return;
-};
+}
 
 // Locate the user
 function findMe(){
@@ -280,9 +279,9 @@ function findMe(){
 				map:map
 			});
 			map.panTo(locateOrigin.position);
-		})
+		});
 	}
-};
+}
 
 // Adds a marker to the map.
 function addMarker(location, map) {
@@ -296,8 +295,7 @@ function addMarker(location, map) {
 	});
 
 	showDirection(userMarker.position);
-};
-
+}
 
 function showDirection(location){
 	if(directionsDisplay){
@@ -307,7 +305,7 @@ function showDirection(location){
 	var directionsService = new google.maps.DirectionsService();
 	directionsDisplay = new google.maps.DirectionsRenderer();
 
-	selectedMode = selectTravelMode();
+	var selectedMode = selectTravelMode();
 
 	directionsDisplay.setMap(map);
 	directionsService.route({
@@ -325,7 +323,7 @@ function showDirection(location){
 				selectedMode = selectedMode[0].toUpperCase() + selectedMode.slice(1).toLowerCase();
 				transportOutput.innerText = selectedMode;
 			} else if(selectedMode === "DRIVING"){
-				calculateFuelCost()
+				calculateFuelCost();
 			} else if(selectedMode === "TRANSIT"){
 				selectedMode = selectedMode[0].toUpperCase() + selectedMode.slice(1).toLowerCase();
 				costOutput.innerText = " NA ";
@@ -339,7 +337,7 @@ function showDirection(location){
 			sendError(status);
 		}
 	});
-};
+}
 
 // Allows the user to see the distance from them to the point
 function showDistance(distanceFromOrigin){
@@ -353,7 +351,7 @@ function showDistance(distanceFromOrigin){
 function selectTravelMode(){
 	var mode = document.getElementById("transport").value;
 	return mode;
-};
+}
 
 // This will calculate the cost of travel according to the users recommended
 // vehicle if they were to drive.
@@ -361,7 +359,7 @@ function calculateFuelCost(){
 	// Using this variable because the distanceFromOrigin variable is global
 	// and affects other functions in the API.
 	var travelDistance;
-	var daysCost
+	var daysCost;
 
 	caloriesOutput.innerText = " NA ";
 
@@ -387,14 +385,14 @@ function calculateFuelCost(){
 	// Send the calculated value to be outputted through to the screen
 	costOutput.innerText = "";
 	costOutput.innerText = "$" + travelCost.toFixed(2);
-};
+}
 
 function calculateCalories(selectedTransport){
 	var travelDistance = distanceFromOrigin / 1000;
 	caloriesOutput.innerText = "";
 	costOutput.innerText = " NA ";
 	caloriesOutput.innerText = (calories * travelDistance).toFixed(0);
-};
+}
 
 // This is the error message displayed to the user if their route produces no 
 // result or an error has occured
@@ -404,7 +402,7 @@ function sendError(status){
 	} else if(status === "ZERO_RESULTS"){
 		alert("Sorry! Your route returned no results.");
 	}
-};
+}
 
 // Validating input fields about number of people and number of days
 // This is called within jQuery and the returned values are sent through
@@ -428,11 +426,14 @@ function validateInput(input, error, min, max){
 		return false;
 	}
 	return [true, input];
-};
+}
 
+// This is where calculations are made using the information
+// provided by the user. With user input, the program will determine
+// which vehicle to use. The information is passed through the variables
+// people and days.
 function runCalculations(people, days){
 	transportOutput.innerText = "";
-	var costOfTravel;
 
 	if( people == 1 && days <= 5 ){
 		// Motorbike Conditions
@@ -450,5 +451,6 @@ function runCalculations(people, days){
 		recommendedTransport = "Not Applicable";
 	}
 
+	// After running through the conditions, the output is updated.
 	transportOutput.innerText = recommendedTransport;
-};
+}
