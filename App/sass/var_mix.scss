@@ -1,0 +1,34 @@
+// Creating Variables
+// Sizing Variables
+$null:0px;
+$full:100%;
+
+// Colouring Variables
+$primary:#142C51;
+$secondary:#FFFFFF;
+$accent:#76B2B7;
+
+// Mixins to prevent long lines of coding
+// Font mixins
+@mixin josefin{font-family: 'Josefin Sans', sans-serif;}
+@mixin raleway{font-family: 'Raleway', sans-serif;}
+
+// Perfect Centering Mixins
+@mixin centerObject{
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+}
+
+@mixin centerText{
+	width:$full;
+	height:auto;
+	text-align:center;
+}
+
+// Fullscreen Mixins
+@mixin fullscreen{
+	min-width:$full;
+	min-height:$full;
+}

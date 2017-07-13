@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<title>Tourism New Zealand App</title>
+
+		<!-- Setting Logo to Tab -->
+		<link rel="shortcut icon" type="image/x-icon" href="images/tabLogo.png">
+
+		<!-- Setting meta data for search engines -->
+		<meta charset="utf-8">
+		<meta name="Author" content="Massey Isa'ako">
+		<meta name="Keyords" content="tourism, app, travel, New Zealand, maori">
+		<meta name="Description" content="An amazing travel app developed for you! Want recommendations on travel in New Zealand, fuel cost and calories? Traverse, we'll support your journey.">
+
+		<!-- Viewport Used for Responsive Design -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+		<!-- Connecting to Font Awesome Stylesheet-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+		<!-- Swiper CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.css">
+
+		<!-- Connecting to TNZ CSS Stylesheet -->
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	</head>
+	<body>
+
+		<!-- Full containment div, with all app content inside -->
+		<div id="wrapper">
+			<!-- Background parallax video -->
+			<div id="video-container">
+				<video id="parallax-vid" poster="images/back2cam.jpg" autoplay muted>
+					<source src="videos/parallax_vid.mp4" type="video/mp4">
+					<source src="videos/parallax_vid.webm" type="video/webm">
+				</video>
+			</div>
+
+			<!-- Overlay will remain here as a container for all content -->
+			<div id="fixed-overlay">
+
+				<!-- Navigation -->
+				<div id="nav-container">
+					<div id="home-reload"><img src="images/logo.png" alt="This is the Tourism New Zealand Logo."></div>
+					<i id="menu-link" class="fa fa-th-list" aria-hidden="true"></i>
+				</div>
+
+				<!-- Splash/Landing stage -->
+				<div id="splash" class="stage-container">
+					<img src="images/logo.png" alt="This is the Tourism New Zealand Logo.">
+					<button id="start" class="standard-button">GET STARTED!</button>
+				</div>
+
+				<!-- Slider main container -->
+				<div id="intro-container" class="stage-container">
+					<div id="top-left" class="img-container"></div>
+					<div id="bottom-right" class="img-container"><p>Swipe Up</p></div>
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div id="slide1" class="swiper-slide">
+								<h1>Kia ora</h1><br>
+							</div>
+							<div id="slide2" class="swiper-slide">
+								<h1>I'm Traverse</h1>
+							</div>
+							<div id="slide3" class="swiper-slide">
+								<h1>I'm here to help you explore<br>Aotearoa</h1>
+							</div>
+							<div id="slide4" class="swiper-slide">
+								<button id="fade-intro" class="standard-button">
+									Continue
+								</button>
+							</div>
+						</div>
+						<!-- Add Pagination -->
+        				<div class="swiper-pagination"></div>
+					</div>
+				</div>
+
+				<!-- Input Form Stage -->
+				<div id="input-form" class="stage-container">
+
+					<form autocomplete="on" action="index.html" method="POST" enctype="multipart/form-data" id="user-input-form">
+
+					<!-- Number of People Visiting -->
+						<div class="form-group">
+							<i class="fa fa-users" aria-hidden="true"></i>
+							<label for="people">
+								Number of People
+							</label><br>
+							<span id="people-errors"></span>
+
+							<!-- Increase and decrease values -->
+							<div class="change-value down"><i class="fa fa-minus-square" aria-hidden="true"></i></div>
+								<input type="number" name="people" id="people" value="1" min="1" max="6">
+							<div class="change-value up"><i class="fa fa-plus-square" aria-hidden="true"></i></div>
+						</div>
+
+						<!-- Number of Days Visiting NZ -->
+						<div class="form-group">
+							<i class="fa fa-calendar" aria-hidden="true"></i>
+							<label for="days">
+								Days in New Zealand
+							</label><br>
+							<span id="days-errors"></span>
+
+							<!-- Increase and decrease values -->
+							<div class="change-value down"><i class="fa fa-minus-square" aria-hidden="true"></i></div>
+								<input type="number" name="days" id="days" value="3" min="1" max="15">
+							<div class="change-value up"><i class="fa fa-plus-square" aria-hidden="true"></i></div>
+						</div>
+
+						<!-- Selected Transport Mode -->
+						<div class="form-group">
+							<i class="fa fa-car" aria-hidden="true"></i>
+							<label for="transport">
+								Select Transport Mode
+							</label><br>
+							<span id="transport-errors"></span>
+							<select name="transport" id="transport">
+								<option value="DRIVING">DRIVING</option>
+								<option value="BICYCLING">BICYCLING</option>
+								<option value="TRANSIT">TRANSIT</option>
+								<option value="WALKING">WALKING</option>
+							</select>
+						</div>
+
+						<input class="standard-button" type="submit" name="submit" value="FIND ROUTE" id="submit">
+
+					</form>
+
+				</div>
+
+				<!-- Map Stage -->
+				<div id="map-stage" class="stage-container">
+				<!-- This is the map container itself, used by the Google Maps API to embed itself -->
+					<div id="map"></div>
+
+					<!-- Container for the slider at the bottom of the screen -->
+					<div id="slider-container">
+						<!-- This is the container for the arrow to toggle the slider -->
+						<div id="toggle-info-slider">
+							<i id="chevron-toggle" class="fa fa-chevron-up" aria-hidden="true"></i>
+						</div>
+						<!-- This slider is separated into four classes. Each holding info about: -->
+						<!-- 1) Transport 2) Distance km 3) Travel Cost 4) Calories Burned -->
+						<div id="slider-info">
+							<div id="transport-container" class="info-group">
+								<i class="fa fa-car" aria-hidden="true"></i>
+								<p class="tooltip">Transport</p>
+								<span id="transport-info"> - </span>
+							</div>
+							<div id="distance-container" class="info-group">
+								<i class="fa fa-compass" aria-hidden="true"></i>
+								<p class="tooltip">Distance km</p>
+								<span id="distance-info"> - </span>
+							</div>
+							<div id="cost-container" class="info-group">
+								<i class="fa fa-money" aria-hidden="true"></i>
+								<p class="tooltip">Travel Cost</p>
+								<span id="cost-info"> - </span>
+							</div>
+							<div id="calories-container" class="info-group">
+								<i class="fa fa-fire" aria-hidden="true"></i>
+								<p class="tooltip">Calories Burned</p>
+								<span id="calories-info"> - </span>
+							</div>
+						</div>
+					</div>
+					<div id="prompt-route">
+						<h3>Please read!</h3>
+						<hr>
+						<p>Enable your device location for this app to work.</p>
+						<p>Tap the map to add your destination.</p>
+						<p>Tap the arrow to see:</p>
+						<ul>
+							<li>Transport Recommendations</li>
+							<li>Journey Distance</li>
+							<li>Cost of Travel</li>
+							<li>Calories Burned</li>
+						</ul>
+						<p class="koru-attribution">Koru - Andrew Fyfe</p>
+						<button id="close-prompt" class="standard-button">Okay</button>
+
+						<div id="footer">
+							<p>Designed and Developed by Massey Isa'ako, 2017 &#169;</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div id="fullscreen"></div>
+		</div>
+
+		<!-- jQuery from Google Hosted Libraries -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+		<!-- Google Maps CDN-->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCArtnqlCNjpV-XZSdkZ1he2Z5jUXTkUN8&libraries=geometry"></script>
+
+		<!-- Swiper jQuery -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.jquery.js"></script>
+
+		<!-- My Javascript File -->
+		<script type="text/javascript" src="js/script.js"></script>
+
+	</body>
+</html>
