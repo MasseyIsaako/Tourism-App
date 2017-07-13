@@ -348,8 +348,6 @@ video{
 	display:none;
 
 	#map{
-		width:100vw;
-		height:100vh;
 		@include fullscreen;
 		position:absolute;
 		display:block;
