@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAIA,uCAAsC,CACrC,cAAc,CACb,MAAM,CAAC,gBAAgB,CACvB,gBAAgB,CAAC,iBAAiB",
-"sources": ["../sass/mediaqueries.scss"],
-"names": [],
-"file": "mediaqueries.css"
-}

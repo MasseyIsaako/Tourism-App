@@ -364,9 +364,8 @@ video{
 			height:auto;
 			width:10%;
 			margin:$null 45%;
-			// margin-bottom:50px;
 			z-index:2;
-			bottom:$null;
+			bottom:50px;
 
 			i{
 				@include centerObject;
