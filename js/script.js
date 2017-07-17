@@ -101,16 +101,16 @@ $(document).ready(function(){
 		// These are variables that identify the input field and the max value of the input field
 		var integerValue = this.parentNode;
 		var inputField = this.parentNode;
-		var maxValue = Number(integerValue.childNodes[12].max);
+		var maxValue = Number(integerValue.childNodes[16].max);
 
-		integerValue = integerValue.childNodes[12];
+		integerValue = integerValue.childNodes[16];
 		integerValue = Number(integerValue.value);
 
 		// If the current input field value is === the maximum set in the HTML than return, else add 1.
 		if(integerValue === maxValue){
 			return;
 		} else if(integerValue < maxValue){
-			inputField.childNodes[12].value = integerValue + 1;
+			inputField.childNodes[16].value = integerValue + 1;
 		}
 	});
 
@@ -118,16 +118,16 @@ $(document).ready(function(){
 		// These are variables that identify the input field and the max value of the input field
 		var integerValue = this.parentNode;
 		var inputField = this.parentNode;
-		var minValue = Number(integerValue.childNodes[12].min);
+		var minValue = Number(integerValue.childNodes[16].min);
 
-		integerValue = integerValue.childNodes[12];
+		integerValue = integerValue.childNodes[16];
 		integerValue = Number(integerValue.value);
 		
 		// If the current input field value is === the minimum set in the HTML than return, else minus 1.
 		if(integerValue === minValue){
 			return;
 		} else if(integerValue > minValue){
-			inputField.childNodes[12].value = integerValue - 1;
+			inputField.childNodes[16].value = integerValue - 1;
 		}
 	});
 
