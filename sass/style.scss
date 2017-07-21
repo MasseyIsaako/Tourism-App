@@ -521,8 +521,20 @@ video{
 @media only screen and (min-width:1025px){
 	#fullscreen{
 		@include fullscreen;
+		@include raleway;
 		background-color:black;
 		position:fixed;
 		z-index:100;
+		color:$secondary !important;
+
+		h3, i{
+			@include centerObject;
+			@include centerText;
+		}
+
+		.fa{
+			font-size:50px;
+			padding-bottom:50px;
+		}
 	}
 }
